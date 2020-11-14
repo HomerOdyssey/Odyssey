@@ -5,8 +5,8 @@ public class Choice : MonoBehaviour
 {
     public float qualityOfLifeChange;
     public float stabilityChange;
-    public float costMilitary;
-    public float costHospitality;
+    public long costMilitary;
+    public long costHospitality;
 
     public int turns;
 
@@ -16,6 +16,11 @@ public class Choice : MonoBehaviour
     }
 
     private void OnPressed()
+    {
+        UIManager.Instance.Add(this);
+    }
+
+    public void Reject()
     {
 
     }
