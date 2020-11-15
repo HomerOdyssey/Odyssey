@@ -1093,8 +1093,8 @@ MonoBehaviour:
   peaceBudgetText: {fileID: 2016540685}
   peaceBudgetSlider: {fileID: 139428052}
   iconsCanvas: {fileID: 1711558708}
-  humanitarionBudget: 11000000
-  peaceBudget: 25000000
+  humanitarionBudget: 160000000
+  peaceBudget: 160000000
   militaryBudget: 11000000000
 --- !u!1 &572372523 stripped
 GameObject:
@@ -1946,6 +1946,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822622032}
   m_CullTransparentMesh: 0
+--- !u!1 &863676615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7809485437788996420, guid: f93b3bb3b7f62bf4e929699244d65f6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2003644380}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &863676619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863676615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ea67b94dedcc2429619e0306b77807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qualityOfLifeChange: -0.1
+  stabilityChange: -0.1
+  costMilitary: 0
+  costHospitality: 0
+  costPeace: 0
+  turns: 50
 --- !u!1 &904056120
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,7 +3417,7 @@ GameObject:
   - component: {fileID: 1617005283}
   - component: {fileID: 1617005282}
   m_Layer: 5
-  m_Name: Bomb
+  m_Name: Red Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5185,7 +5209,7 @@ GameObject:
   - component: {fileID: 2086327826}
   - component: {fileID: 2086327825}
   m_Layer: 5
-  m_Name: UN
+  m_Name: Peace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

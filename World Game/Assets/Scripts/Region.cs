@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +14,13 @@ public class Region : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<Button>().onClick.AddListener(SetAsMenu);
         GetComponent<Image>().alphaHitTestMinimumThreshold = 0.001f;
         UIManager.Instance.OnNextTurn += NextTurn;
+
+        Choice choice = GetComponent<Choice>();
+        nextChoices.Add(choice);
+        choice.enabled = false;
+        GetComponent<Button>().onClick.AddListener(SetAsMenu);
     }
 
     public void SetAsMenu()
@@ -48,7 +53,9 @@ public class Region : MonoBehaviour
         for (int i = nextChoices.Count - 1; i >= 0; i--)
         {
             quality += nextChoices[i].qualityOfLifeChange;
+            quality = Mathf.Clamp01(quality);
             stability += nextChoices[i].stabilityChange;
+            stability = Mathf.Clamp01(stability);
 
 
             if (--nextChoices[i].turns <= 0)

@@ -14,12 +14,20 @@ public class UIManager : MonoBehaviour
 
     [Header("Budget")]
     [SerializeField] private TextMeshProUGUI budgetText;
+    [SerializeField] private Image budgetSlider;
     [SerializeField] private TextMeshProUGUI militaryBudgetText;
+    [SerializeField] private Image militaryBudgetSlider;
+    [SerializeField] private TextMeshProUGUI peaceBudgetText;
+    [SerializeField] private Image peaceBudgetSlider;
     [SerializeField] private Canvas iconsCanvas;
 
 
-    [SerializeField] private long budget;
+    [SerializeField] private long humanitarionBudget;
+    private long humanitarionBudgetMax;
+    [SerializeField] private long peaceBudget;
+    private long peaceBudgetMax;
     [SerializeField] private long militaryBudget;
+    private long militaryBudgetMax;
 
     public event Action OnNextTurn;
 
@@ -29,6 +37,9 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        militaryBudgetMax = militaryBudget;
+        humanitarionBudgetMax = humanitarionBudget;
+        peaceBudgetMax = peaceBudget;
         Render();
     }
 
@@ -45,7 +56,7 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        if (militaryBudget - choice.costMilitary <= 0 || budget - choice.costHospitality <= 0)
+        if (militaryBudget - choice.costMilitary <= 0 || humanitarionBudget - choice.costHospitality <= 0 || peaceBudget - choice.costPeace <= 0)
         {
             choice.Reject();
             return;
@@ -53,7 +64,8 @@ public class UIManager : MonoBehaviour
         }
 
         militaryBudget -= choice.costMilitary;
-        budget -= choice.costHospitality;
+        humanitarionBudget -= choice.costHospitality;
+        peaceBudget -= choice.costPeace;
         active.Add(choice);
         Render();
     }
@@ -62,14 +74,20 @@ public class UIManager : MonoBehaviour
     public void NextTurn()
     {
         OnNextTurn?.Invoke();
-        
+
         StepManager.Instance.StartGoingToNextStep();
     }
 
     public void Render()
     {
         militaryBudgetText.text = $"$ {militaryBudget}";
-        budgetText.text = $"$ {budget}";
+        budgetText.text = $"$ {humanitarionBudget}";
+        peaceBudgetText.text = $"$ {peaceBudget}";
+
+        peaceBudgetSlider.fillAmount = Mathf.InverseLerp(0, peaceBudgetMax, peaceBudget);
+        budgetSlider.fillAmount = Mathf.InverseLerp(0, humanitarionBudgetMax, humanitarionBudget);
+        militaryBudgetSlider.fillAmount = Mathf.InverseLerp(0, militaryBudgetMax, militaryBudget);
+
         if (active == null)
         {
             ui.enabled = false;
@@ -84,11 +102,11 @@ public class UIManager : MonoBehaviour
         stabilitySlider.fillAmount = active.GetStability();
         qualityOfLifeSlider.fillAmount = active.GetQuality();
     }
-    
+
     public void NextDay()
     {
         if (active == null) return;
-        
+
         qualityOfLifeSlider.fillAmount += (active.GetStability() - qualityOfLifeSlider.fillAmount) / 365;
         stabilitySlider.fillAmount += (active.GetStability() - stabilitySlider.fillAmount) / 365;
     }

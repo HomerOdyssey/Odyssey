@@ -7,6 +7,7 @@ public class Choice : MonoBehaviour
     public float stabilityChange;
     public long costMilitary;
     public long costHospitality;
+    public long costPeace;
 
     public int turns;
 
