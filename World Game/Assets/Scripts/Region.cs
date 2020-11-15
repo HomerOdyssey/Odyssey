@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(Button), typeof(Image))]
 public class Region : MonoBehaviour
 {
     [SerializeField] private float quality;
@@ -14,6 +14,7 @@ public class Region : MonoBehaviour
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(SetAsMenu);
+        GetComponent<Image>().alphaHitTestMinimumThreshold = 0.001f;
         UIManager.Instance.OnNextTurn += NextTurn;
     }
 
@@ -44,10 +45,8 @@ public class Region : MonoBehaviour
 
     private void NextTurn()
     {
-        Debug.Log(nextChoices.Count);
         for (int i = nextChoices.Count - 1; i >= 0; i--)
         {
-            Debug.Log(i);
             quality += nextChoices[i].qualityOfLifeChange;
             stability += nextChoices[i].stabilityChange;
 
@@ -57,5 +56,12 @@ public class Region : MonoBehaviour
                 nextChoices.RemoveAt(i);
             }
         }
+    }
+
+    private void Reset()
+    {
+        name = gameObject.name;
+        quality = Random.Range(0, 1f);
+        stability = Random.Range(0, 1f);
     }
 }
