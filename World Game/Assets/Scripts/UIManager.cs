@@ -68,8 +68,8 @@ public class UIManager : MonoBehaviour
 
     public void Render()
     {
-        militaryBudgetText.text = $"Military Budget: €{militaryBudget}";
-        budgetText.text = $"Humanitarian Budget: €{budget}";
+        militaryBudgetText.text = $"$ {militaryBudget}";
+        budgetText.text = $"$ {budget}";
         if (active == null)
         {
             ui.enabled = false;
