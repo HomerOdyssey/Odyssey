@@ -17,6 +17,8 @@ public class StepManager : MonoBehaviour
 
     [SerializeField] private TMP_Text dateTextfield;
 
+    [SerializeField] private float speedInSeconds;
+
     private void Awake()
     {
         if (Instance == null)
@@ -41,9 +43,12 @@ public class StepManager : MonoBehaviour
 
         while (_currentDate < targetDate)
         {
-            dateTextfield.text = _currentDate.ToString("d");
+            dateTextfield.text = _currentDate.ToString("dd/MM/yyyy");
             _currentDate = _currentDate.AddDays(1);
-            yield return new WaitForSeconds(0.01f);
+            
+            UIManager.Instance.NextDay();
+            
+            yield return new WaitForSeconds(speedInSeconds);
         }
 
         for (int i = 0; i < _regions.Length; i++)
@@ -51,7 +56,5 @@ public class StepManager : MonoBehaviour
 
         _steps++;
         _goingToNextStep = null;
-        
-        UIManager.Instance.Render();
     }
 }

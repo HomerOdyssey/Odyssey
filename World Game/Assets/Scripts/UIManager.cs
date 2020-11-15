@@ -84,5 +84,13 @@ public class UIManager : MonoBehaviour
         stabilitySlider.fillAmount = active.GetStability();
         qualityOfLifeSlider.fillAmount = active.GetQuality();
     }
+    
+    public void NextDay()
+    {
+        if (active == null) return;
+        
+        qualityOfLifeSlider.fillAmount += (active.GetStability() - qualityOfLifeSlider.fillAmount) / 365;
+        stabilitySlider.fillAmount += (active.GetStability() - stabilitySlider.fillAmount) / 365;
+    }
 
 }
