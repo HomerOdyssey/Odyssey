@@ -62,10 +62,11 @@ public class UIManager : MonoBehaviour
     public void NextTurn()
     {
         OnNextTurn?.Invoke();
-        Render();
+        
+        StepManager.Instance.StartGoingToNextStep();
     }
 
-    private void Render()
+    public void Render()
     {
         militaryBudgetText.text = $"Military Budget: €{militaryBudget}";
         budgetText.text = $"Humanitarian Budget: €{budget}";
@@ -82,6 +83,14 @@ public class UIManager : MonoBehaviour
         nameText.text = active.GetName();
         stabilitySlider.fillAmount = active.GetStability();
         qualityOfLifeSlider.fillAmount = active.GetQuality();
+    }
+    
+    public void NextDay()
+    {
+        if (active == null) return;
+        
+        qualityOfLifeSlider.fillAmount += (active.GetStability() - qualityOfLifeSlider.fillAmount) / 365;
+        stabilitySlider.fillAmount += (active.GetStability() - stabilitySlider.fillAmount) / 365;
     }
 
 }

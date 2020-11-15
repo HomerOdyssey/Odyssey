@@ -43,7 +43,7 @@ public class Region : MonoBehaviour
         nextChoices.Add(choice);
     }
 
-    private void NextTurn()
+    public void NextTurn()
     {
         for (int i = nextChoices.Count - 1; i >= 0; i--)
         {
