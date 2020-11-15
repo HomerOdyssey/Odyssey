@@ -1118,8 +1118,8 @@ MonoBehaviour:
   stabilitySlider: {fileID: 1441676419}
   nameText: {fileID: 677479931}
   ui: {fileID: 1039268036}
-  budgetText: {fileID: 0}
-  militaryBudgetText: {fileID: 0}
+  budgetText: {fileID: 1960558538}
+  militaryBudgetText: {fileID: 1166459648}
   iconsCanvas: {fileID: 1711558708}
   budget: 20000
   militaryBudget: 2000000
