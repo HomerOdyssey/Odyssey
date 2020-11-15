@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StepManager : MonoBehaviour
@@ -11,6 +13,10 @@ public class StepManager : MonoBehaviour
     private int _steps = 1;
     private Coroutine _goingToNextStep;
 
+    [SerializeField] private Region[] _regions;
+
+    [SerializeField] private TMP_Text dateTextfield;
+
     private void Awake()
     {
         if (Instance == null)
@@ -19,7 +25,7 @@ public class StepManager : MonoBehaviour
             Destroy(this);
     }
 
-    private void StartGoingToNextStep()
+    public void StartGoingToNextStep()
     {
         _goingToNextStep = StartCoroutine(GoToNextStep());
     }
@@ -35,11 +41,17 @@ public class StepManager : MonoBehaviour
 
         while (_currentDate < targetDate)
         {
+            dateTextfield.text = _currentDate.ToString("d");
             _currentDate = _currentDate.AddDays(1);
             yield return new WaitForSeconds(0.01f);
         }
 
+        for (int i = 0; i < _regions.Length; i++)
+            _regions[i].NextTurn();
+
         _steps++;
         _goingToNextStep = null;
+        
+        UIManager.Instance.Render();
     }
 }

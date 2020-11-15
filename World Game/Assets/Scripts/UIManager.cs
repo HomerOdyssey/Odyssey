@@ -62,10 +62,11 @@ public class UIManager : MonoBehaviour
     public void NextTurn()
     {
         OnNextTurn?.Invoke();
-        Render();
+        
+        StepManager.Instance.StartGoingToNextStep();
     }
 
-    private void Render()
+    public void Render()
     {
         militaryBudgetText.text = $"Military Budget: €{militaryBudget}";
         budgetText.text = $"Humanitarian Budget: €{budget}";
