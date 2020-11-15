@@ -80,9 +80,9 @@ public class UIManager : MonoBehaviour
 
     public void Render()
     {
-        militaryBudgetText.text = $"$ {militaryBudget}";
-        budgetText.text = $"$ {humanitarionBudget}";
-        peaceBudgetText.text = $"$ {peaceBudget}";
+        militaryBudgetText.text = $"€ {militaryBudget}";
+        budgetText.text = $"€ {humanitarionBudget}";
+        peaceBudgetText.text = $"€ {peaceBudget}";
 
         peaceBudgetSlider.fillAmount = Mathf.InverseLerp(0, peaceBudgetMax, peaceBudget);
         budgetSlider.fillAmount = Mathf.InverseLerp(0, humanitarionBudgetMax, humanitarionBudget);
