@@ -19,6 +19,8 @@ public class StepManager : MonoBehaviour
 
     [SerializeField] private float speedInSeconds;
 
+    [SerializeField] private GameObject videoPopup;
+
     private void Awake()
     {
         if (Instance == null)
@@ -29,7 +31,10 @@ public class StepManager : MonoBehaviour
 
     public void StartGoingToNextStep()
     {
-        _goingToNextStep = StartCoroutine(GoToNextStep());
+        if (!IsGoingToNextStep())
+        {
+            _goingToNextStep = StartCoroutine(GoToNextStep());
+        }
     }
 
     public bool IsGoingToNextStep()
@@ -55,6 +60,12 @@ public class StepManager : MonoBehaviour
             _regions[i].NextTurn();
 
         _steps++;
+
+        if (_steps > 3)
+        {
+            videoPopup.SetActive(true);
+        }
+        
         _goingToNextStep = null;
     }
 }
